@@ -13,23 +13,50 @@ public class Spike : MonoBehaviour
     {
         scaleStartTime = Time.time;
         initialScale = transform.localScale;
+        Retract();
     }
 
     private void Update()
     {
-        if (!isScaling && Time.time - scaleStartTime < scalingTime)
+        if (isScaling)
         {
-            // Calculate the current scale factor based on time
-            float scaleFactor = (Time.time - scaleStartTime) / scalingTime;
-            
-            // Set the local scale of the object to the calculated scale factor
-            transform.localScale = new Vector3(initialScale.x, scaleFactor * initialScale.y, initialScale.z);
+            if (Time.time - scaleStartTime < scalingTime)
+            {
+                // Calculate the current scale factor based on time
+                float scaleFactor = (Time.time - scaleStartTime) / scalingTime;
+
+                // Set the local scale of the object to the calculated scale factor
+                transform.localScale = new Vector3(initialScale.x, scaleFactor * initialScale.y, initialScale.z);
+            }
+            else
+            {
+                // Ensure that the scale reaches exactly the initial Y-axis value at the end
+                transform.localScale = new Vector3(initialScale.x, initialScale.y, initialScale.z);
+                isScaling = false;
+            }
         }
-        else if (!isScaling)
+    }
+
+    // Function to extend the spike
+    public void Extend()
+    {
+        if (!isScaling)
         {
-            // Ensure that the scale reaches exactly the initial Y-axis value at the end
-            transform.localScale = new Vector3(initialScale.x, initialScale.y, initialScale.z);
+            scaleStartTime = Time.time;
             isScaling = true;
+        }
+    }
+
+    // Function to retract the spike
+    public void Retract()
+    {
+        if (isScaling)
+        {
+            // Reverse the scaling process
+            float currentScaleFactor = (Time.time - scaleStartTime) / scalingTime;
+            float reversedScaleFactor = 1.0f - currentScaleFactor;
+            transform.localScale = new Vector3(initialScale.x, reversedScaleFactor * initialScale.y, initialScale.z);
+            isScaling = false;
         }
     }
 }
