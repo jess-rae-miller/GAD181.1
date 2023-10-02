@@ -9,7 +9,7 @@ public class PowerUps : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timer = GameObject.FindAnyObjectByType<CountdownTimer>();
+        timer = FindAnyObjectByType<CountdownTimer>();
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class PowerUps : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            timer.currentTime += timerIncreaseAmount;
+            timer.IncreaseTimer(timerIncreaseAmount);
             Destroy(gameObject);
         }
     }
