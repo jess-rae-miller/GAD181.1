@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class CountdownTimer : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class CountdownTimer : MonoBehaviour
                 // Timer has expired, stop shrinking
                 isActive = false;
                 currentTime = 0f;
+                RestartCurrentLevel();
             }
 
             // Calculate the new scale based on the timer
@@ -64,6 +66,15 @@ public class CountdownTimer : MonoBehaviour
         {
             IncreaseTimer(20f); // Increase the timer by 60 seconds (1 minute)
         }
+    }
+
+    private void RestartCurrentLevel()
+    {
+        // Get the current active scene's name.
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Reload (restart) the current scene.
+        SceneManager.LoadScene(currentSceneName);
     }
 
     public void IncreaseTimer(float increase)
