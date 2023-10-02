@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 1056715193177913207}
   - component: {fileID: 597558437732231126}
   - component: {fileID: 7582143750121656530}
+  - component: {fileID: 4686223788500957421}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -301,3 +302,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &4686223788500957421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3542049304653243149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437bd968bbb4c2e4b8fd5ce00130db8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShadowTrailActive: 0
+  maxNumberOfObjectsInPool: 30
+  shadowTrailDestroyTime: 0.1
+  shadowStartingAlpha: 0.05
