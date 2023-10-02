@@ -137,4 +137,4 @@ MonoBehaviour:
   player: {fileID: 0}
   playerRenderer: {fileID: 0}
   playerCollider: {fileID: 0}
-  timerIncreaseAmount: 3
+  timerIncreaseAmount: 5
