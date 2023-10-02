@@ -1,41 +1,84 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System;
-using UnityEngine.SceneManagement;
 
 public class CountdownTimer : MonoBehaviour
 {
-    public float currentTime = 0f;
-    private float startingTime = 10f;
-    public bool isActive = true;
+    [SerializeField] private float startTime = 10f;
+    private float currentTime;
+    [SerializeField] private TextMeshPro timerText;
+    [SerializeField] private Vector2 direction = Vector2.up;
+    [SerializeField] private Color startColor = Color.green;
+    [SerializeField] private Color endColor = Color.red;
+    private Vector3 originalSize;
+    [HideInInspector] public bool isActive = false;
+    private Renderer objectRenderer; // Reference to the object's renderer component
 
-    [SerializeField] private TextMeshProUGUI countdownText;
+    private float visualStartTime; // The time at which the visual timer starts
 
+    // Start is called before the first frame update
     void Start()
     {
-        currentTime = startingTime;
+        currentTime = startTime;
+        visualStartTime = startTime;
+        originalSize = transform.localScale;
+        objectRenderer = GetComponent<Renderer>(); // Get the renderer component
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (isActive)
         {
-            currentTime -= 1 * Time.deltaTime;
-            countdownText.text = Math.Round(currentTime, 1).ToString() + " Sec";
-
-            if (currentTime <= 0)
+            currentTime -= Time.deltaTime;
+            UpdateText();
+            if (currentTime <= 0f)
             {
-                RestartLevel();
+                // Timer has expired, stop shrinking
+                isActive = false;
+                currentTime = 0f;
             }
+
+            // Calculate the new scale based on the timer
+            float scaleAmount = Mathf.Clamp(1 - (currentTime / visualStartTime), 0f, 1f); // Shrink from 1 to 0
+
+            // Calculate the new scale on the specified axis
+            Vector3 newScale = new Vector3(
+                originalSize.x - direction.x * scaleAmount * originalSize.x,
+                originalSize.y - direction.y * scaleAmount * originalSize.y,
+                originalSize.z
+            );
+
+            // Apply the new scale
+            transform.localScale = newScale;
+
+            // Interpolate the color based on the timer
+            Color lerpedColor = Color.Lerp(startColor, endColor, scaleAmount);
+
+            // Apply the interpolated color to the object's renderer
+            objectRenderer.material.color = lerpedColor;
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            IncreaseTimer(20f); // Increase the timer by 60 seconds (1 minute)
         }
     }
 
-    private void RestartLevel()
+    public void IncreaseTimer(float increase)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        currentTime += increase;
+
+        // Update visualStartTime to match the new currentTime if currentTime exceeds it
+        if (currentTime > visualStartTime)
+        {
+            visualStartTime = currentTime;
+        }
+    }
+
+    private void UpdateText()
+    {
+        timerText.text = Math.Round(currentTime, 1).ToString();
     }
 }
