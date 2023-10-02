@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.iOS;
+using UnityEngine.SceneManagement;
 
 public class Spike : MonoBehaviour
 {
@@ -58,6 +60,23 @@ public class Spike : MonoBehaviour
             float reversedScaleFactor = 1.0f - currentScaleFactor;
             transform.localScale = new Vector3(initialScale.x, reversedScaleFactor * initialScale.y, initialScale.z);
             isScaling = false;
+        }
+    }
+    private void RestartCurrentLevel()
+    {
+        // Get the current active scene's name.
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Reload (restart) the current scene.
+        SceneManager.LoadScene(currentSceneName);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            RestartCurrentLevel();
+            Debug.Log("hehe");
         }
     }
 
