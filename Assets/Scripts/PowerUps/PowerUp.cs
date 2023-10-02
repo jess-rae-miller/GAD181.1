@@ -23,9 +23,16 @@ public class PowerUp : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             ActivatePower();
-            Destroy(gameObject);
+            DisableObject();    
         }
     }
+
+    private void DisableObject()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+    }
+
     protected virtual void ActivatePower()
     {
         Debug.Log("Warning: Incorrect Implementation");
