@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     public float scalingTime = 2.0f; // Time it takes to scale from 0 to the saved Y-axis value
+    public float delayTime = 1.0f;  // Time to wait after retracting before extending again
     private float scaleStartTime;
     private bool isScaling = false;
     private Vector3 initialScale;
@@ -13,7 +14,7 @@ public class Spike : MonoBehaviour
     {
         scaleStartTime = Time.time;
         initialScale = transform.localScale;
-        Retract();
+        StartCoroutine(ContinuousInOut());
     }
 
     private void Update()
@@ -57,6 +58,18 @@ public class Spike : MonoBehaviour
             float reversedScaleFactor = 1.0f - currentScaleFactor;
             transform.localScale = new Vector3(initialScale.x, reversedScaleFactor * initialScale.y, initialScale.z);
             isScaling = false;
+        }
+    }
+
+    // Coroutine to continuously extend and retract the spike
+    private IEnumerator ContinuousInOut()
+    {
+        while (true)
+        {
+            Extend();
+            yield return new WaitForSeconds(scalingTime);
+            Retract();
+            yield return new WaitForSeconds(delayTime); // Wait for the specified delayTime
         }
     }
 }
