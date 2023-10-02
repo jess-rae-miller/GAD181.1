@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scalingTime: 2
+  delayTime: 1
 --- !u!60 &2666797654163416446
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -144,9 +145,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: -0.0049705505, y: 0.8668374}
+      - {x: -0.5, y: -0.009414797}
+      - {x: 0.55506516, y: -0.0054818355}
   m_UseDelaunayMesh: 0
 --- !u!50 &1231898683305829379
 Rigidbody2D:
@@ -174,4 +175,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0

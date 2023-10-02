@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     public float scalingTime = 2.0f; // Time it takes to scale from 0 to the saved Y-axis value
-    public float delayTime = 1.0f;  // Time to wait after retracting before extending again
+    [SerializeField] private float delayTime = 1f;
     private float scaleStartTime;
     private bool isScaling = false;
     private Vector3 initialScale;
