@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    private Vector3 speed;
+    public float speed = 5.0f;
 
     private void Update()
     {
