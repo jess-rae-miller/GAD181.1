@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class SpeedPowerUp : PowerUp
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float speedDuration = 1f;
+    private bool isPowerActive = false;
+    private float startMovementSpeed;
+
     protected override void ActivatePower()
     {
-        //TODO: Speed power implementation here
+        if (!isPowerActive)
+        {
+            isPowerActive = true;
+            startMovementSpeed = playerMovement.moveSpeed;
+            playerMovement.moveSpeed = playerMovement.moveSpeed * 2;
+
+            // Start a timer to re-enable the collider and restore opacity
+            StartCoroutine(DeactivatePowerAfterDuration());
+        }
+    }
+
+    private IEnumerator DeactivatePowerAfterDuration()
+    {
+        yield return new WaitForSeconds(speedDuration);
+
+        isPowerActive = false;
+        playerMovement.moveSpeed = startMovementSpeed;
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3412021349309558712}
   - component: {fileID: 1700343778804981782}
   - component: {fileID: 1437794426740942656}
-  - component: {fileID: 39016446213614231}
+  - component: {fileID: 8617831578837654660}
   m_Layer: 0
   m_Name: GoalArea
   m_TagString: Untagged
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ea8b2783b7b7d4995fa7218e35bbf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &39016446213614231
+--- !u!61 &8617831578837654660
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +127,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
