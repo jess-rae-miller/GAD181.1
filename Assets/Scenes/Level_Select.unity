@@ -605,6 +605,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSelectButton (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3540933577453814525, guid: 0d7eb13b6f9805c4f9eed87cf3451737, type: 3}
+      propertyPath: level
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6095371727074609549, guid: 0d7eb13b6f9805c4f9eed87cf3451737, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2063,7 +2067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3540933577453814525, guid: 0d7eb13b6f9805c4f9eed87cf3451737, type: 3}
       propertyPath: level
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6095371727074609549, guid: 0d7eb13b6f9805c4f9eed87cf3451737, type: 3}
       propertyPath: m_Pivot.x
