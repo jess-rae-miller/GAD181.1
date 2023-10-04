@@ -97,6 +97,6 @@ public class CountdownTimer : MonoBehaviour
 
     private void UpdateText()
     {
-        timerText.text = Math.Round(currentTime, 1).ToString() + "s";
+        timerText.text = Math.Round(currentTime, 1).ToString();
     }
 }
