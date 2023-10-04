@@ -12,12 +12,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         ProcessInputs();
+
+        // Check if the player has moved
+        if (moveDirection != Vector2.zero)
+        {
+            FindAnyObjectByType<CountdownTimer>().isActive = true;
+        }
     }
 
     void FixedUpdate()
     {
         Move();
     }
+
     // Movement on X & Y axis
     void ProcessInputs()
     {
@@ -30,14 +37,5 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-    }
-    
-    // If I want to add a wall collision feature
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Walls")
-        {
-            //dunno yet
-        }
     }
 }

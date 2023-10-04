@@ -1,67 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.iOS;
 using UnityEngine.SceneManagement;
 
 public class Spike : MonoBehaviour
 {
-    public float scalingTime = 2.0f; // Time it takes to scale from 0 to the saved Y-axis value
-    [SerializeField] private float delayTime = 1f;
-    private float scaleStartTime;
-    private bool isScaling = false;
+    [SerializeField] private float extensionSpeed = 2.0f; // Time it takes to scale from 0 to the saved Y-axis value
+    [SerializeField] private float retractionTime = 1.0f; // Time it takes to scale from 0 to the saved Y-axis value
+    [SerializeField] private float retractedPauseTime = 0.1f;
     private Vector3 initialScale;
 
     private void Start()
     {
-        scaleStartTime = Time.time;
         initialScale = transform.localScale;
         StartCoroutine(ContinuousInOut());
     }
 
-    private void Update()
+    // Function to smoothly extend the spike
+    private IEnumerator Extend()
     {
-        if (isScaling)
-        {
-            if (Time.time - scaleStartTime < scalingTime)
-            {
-                // Calculate the current scale factor based on time
-                float scaleFactor = (Time.time - scaleStartTime) / scalingTime;
+        float elapsedTime = 0f;
 
-                // Set the local scale of the object to the calculated scale factor
-                transform.localScale = new Vector3(initialScale.x, scaleFactor * initialScale.y, initialScale.z);
-            }
-            else
-            {
-                // Ensure that the scale reaches exactly the initial Y-axis value at the end
-                transform.localScale = new Vector3(initialScale.x, initialScale.y, initialScale.z);
-                isScaling = false;
-            }
+        while (elapsedTime < extensionSpeed)
+        {
+            float scaleFactor = Mathf.Lerp(0f, initialScale.y, elapsedTime / extensionSpeed);
+            transform.localScale = new Vector3(initialScale.x, scaleFactor, initialScale.z);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        // Ensure that the scale reaches exactly the initial Y-axis value at the end
+        transform.localScale = initialScale;
     }
 
-    // Function to extend the spike
-    public void Extend()
+    // Function to smoothly retract the spike
+    private IEnumerator Retract()
     {
-        if (!isScaling)
+        float elapsedTime = 0f;
+        Vector3 targetScale = new Vector3(initialScale.x, 0f, initialScale.z);
+
+        while (elapsedTime < retractionTime)
         {
-            scaleStartTime = Time.time;
-            isScaling = true;
+            float scaleFactor = Mathf.Lerp(initialScale.y, 0f, elapsedTime / retractionTime);
+            transform.localScale = new Vector3(initialScale.x, scaleFactor, initialScale.z);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        // Ensure that the scale reaches exactly 0 at the end
+        transform.localScale = targetScale;
     }
 
-    // Function to retract the spike
-    public void Retract()
-    {
-        if (isScaling)
-        {
-            // Reverse the scaling process
-            float currentScaleFactor = (Time.time - scaleStartTime) / scalingTime;
-            float reversedScaleFactor = 1.0f - currentScaleFactor;
-            transform.localScale = new Vector3(initialScale.x, reversedScaleFactor * initialScale.y, initialScale.z);
-            isScaling = false;
-        }
-    }
     private void RestartCurrentLevel()
     {
         // Get the current active scene's name.
@@ -76,7 +65,6 @@ public class Spike : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             RestartCurrentLevel();
-            Debug.Log("hehe");
         }
     }
 
@@ -85,10 +73,10 @@ public class Spike : MonoBehaviour
     {
         while (true)
         {
-            Extend();
-            yield return new WaitForSeconds(scalingTime);
-            Retract();
-            yield return new WaitForSeconds(delayTime); // Wait for the specified delayTime
+            yield return StartCoroutine(Extend());
+            //yield return new WaitForSeconds(scalingTime);
+            yield return StartCoroutine(Retract());
+            yield return new WaitForSeconds(retractedPauseTime);
         }
     }
 }

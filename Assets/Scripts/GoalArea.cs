@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoalArea : MonoBehaviour
 {
@@ -15,7 +16,23 @@ public class GoalArea : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-         timer.isActive = false;
+            timer.isActive = false;
+            // Get the current active scene
+            Scene currentScene = SceneManager.GetActiveScene();
+
+            // Get the build index of the next scene
+            int nextSceneBuildIndex = currentScene.buildIndex + 1;
+
+            // Check if there's a scene at the next build index
+            if (nextSceneBuildIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                // Load the next scene
+                SceneManager.LoadScene(nextSceneBuildIndex);
+            }
+            else
+            {
+                Debug.LogWarning("No next scene available.");
+            }
         }
     }
 }

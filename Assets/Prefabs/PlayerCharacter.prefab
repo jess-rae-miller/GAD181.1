@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rb: {fileID: 597558437732231126}
+  hasPlayerMoved: 0
 --- !u!50 &597558437732231126
 Rigidbody2D:
   serializedVersion: 4
@@ -330,6 +331,10 @@ PrefabInstance:
     - target: {fileID: 3965011113657229021, guid: 313e8909743ba1f4f879b258338e8670, type: 3}
       propertyPath: m_Name
       value: Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056197075747358407, guid: 313e8909743ba1f4f879b258338e8670, type: 3}
+      propertyPath: isActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8130865008216073104, guid: 313e8909743ba1f4f879b258338e8670, type: 3}
       propertyPath: m_LocalScale.x

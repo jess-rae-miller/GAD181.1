@@ -14,7 +14,7 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private Color startColor = Color.green;
     [SerializeField] private Color endColor = Color.red;
     private Vector3 originalSize;
-    [HideInInspector] public bool isActive = false;
+    public bool isActive = false;
     private Renderer objectRenderer; // Reference to the object's renderer component
 
     private float visualStartTime; // The time at which the visual timer starts
@@ -26,11 +26,14 @@ public class CountdownTimer : MonoBehaviour
         visualStartTime = startTime;
         originalSize = transform.localScale;
         objectRenderer = GetComponent<Renderer>(); // Get the renderer component
+        UpdateText();
+        objectRenderer.material.color = startColor;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isActive);
         if (isActive)
         {
             currentTime -= Time.deltaTime;
@@ -62,6 +65,10 @@ public class CountdownTimer : MonoBehaviour
             // Apply the interpolated color to the object's renderer
             objectRenderer.material.color = lerpedColor;
         }
+        else
+        {
+
+        }
         if (Input.GetKeyDown(KeyCode.I))
         {
             IncreaseTimer(20f); // Increase the timer by 60 seconds (1 minute)
@@ -90,6 +97,6 @@ public class CountdownTimer : MonoBehaviour
 
     private void UpdateText()
     {
-        timerText.text = Math.Round(currentTime, 1).ToString();
+        timerText.text = Math.Round(currentTime, 1).ToString() + "s";
     }
 }
