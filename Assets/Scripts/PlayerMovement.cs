@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rb;
     private Vector2 moveDirection;
+    public int level;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +19,13 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection != Vector2.zero)
         {
             FindAnyObjectByType<CountdownTimer>().isActive = true;
+        }
+
+        // Check if the player's position is outside the boundary
+        if (!isInBoundary())
+        {
+            // Player is out of bounds, restart the level
+            SceneManager.LoadScene("Level_" + level.ToString());
         }
     }
 
@@ -37,5 +46,25 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+    }
+
+    private bool isInBoundary()
+    {
+        // Get the boundary collider's position and size
+        Collider2D boundaryCollider = GameObject.Find("Boundary").GetComponent<Collider2D>();
+
+        // Get the player's position
+        Vector2 playerPosition = transform.position;
+
+        // Check if the player's position is within the boundary
+        if (playerPosition.x >= boundaryCollider.bounds.min.x &&
+            playerPosition.x <= boundaryCollider.bounds.max.x &&
+            playerPosition.y >= boundaryCollider.bounds.min.y &&
+            playerPosition.y <= boundaryCollider.bounds.max.y)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
