@@ -9,7 +9,7 @@ public class GoalArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timer = GameObject.FindAnyObjectByType<CountdownTimer>();
+        timer = FindAnyObjectByType<CountdownTimer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,6 +27,7 @@ public class GoalArea : MonoBehaviour
             if (nextSceneBuildIndex < SceneManager.sceneCountInBuildSettings)
             {
                 // Load the next scene
+                FindAnyObjectByType<DeathCounter>().ResetSceneDeaths();
                 SceneManager.LoadScene(nextSceneBuildIndex);
             }
             else

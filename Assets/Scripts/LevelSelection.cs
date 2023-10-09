@@ -6,14 +6,10 @@ using UnityEngine.SceneManagement;
 public class LevelSelection : MonoBehaviour
 {
     public int level;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void OpenScene()
     {
+        FindAnyObjectByType<SaveManager>().ResetSceneDeaths();
         SceneManager.LoadScene("Level_" + level.ToString());
     }
 

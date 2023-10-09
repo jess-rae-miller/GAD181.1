@@ -80,6 +80,9 @@ public class CountdownTimer : MonoBehaviour
         // Get the current active scene's name.
         string currentSceneName = SceneManager.GetActiveScene().name;
 
+        //Increase scene deaths
+        FindAnyObjectByType<DeathCounter>().IncreaseSceneDeathCount();
+
         // Reload (restart) the current scene.
         SceneManager.LoadScene(currentSceneName);
     }

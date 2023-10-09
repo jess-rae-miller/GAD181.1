@@ -64,6 +64,8 @@ public class Spike : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            //Increase scene deaths
+            collision.GetComponent<DeathCounter>().IncreaseSceneDeathCount();
             RestartCurrentLevel();
         }
     }
