@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 moveDirection;
     public int level;
+    private int bombcount;
 
     // Update is called once per frame
     void Update()
@@ -29,6 +31,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+        /*static void Main(string[] args)
+    {
+        while (true)
+        {
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            if (keyInfo.Key == ConsoleKey.E)
+            {
+                // Call your function here
+                BombExplosion();
+            }
+        }
+    }
+void BombExplosion()
+    {
+        if (bombcount >= 1)
+        {
+
+        }
+    }*/
     void FixedUpdate()
     {
         Move();
