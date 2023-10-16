@@ -7394,7 +7394,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1056715193177913207, guid: 122eb0bddf2d1b84c860ac2a284d0135, type: 3}
       propertyPath: bombCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3542049304653243149, guid: 122eb0bddf2d1b84c860ac2a284d0135, type: 3}
       propertyPath: m_Name
