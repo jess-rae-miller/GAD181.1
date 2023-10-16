@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
         // Check if the player's position is outside the boundary
         if (!isInBoundary())
         {
-            // Player is out of bounds, restart the level
-            SceneManager.LoadScene("Level_" + level.ToString());
+            //Scene currentScene = SceneManager.GetActiveScene();
+            //SceneManager.LoadScene(currentScene.name);
         }
     }
 
@@ -68,9 +68,11 @@ public class PlayerMovement : MonoBehaviour
         // Cast a ray from the player's current position to a direction (e.g., Vector2.down).
         // Adjust the direction based on your game's design.
         Vector2 rayDirection = Vector2.down; // You can change this direction as needed.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1f, LayerMask.GetMask("Boundary"));
 
-        // Check if the ray hit an object with the "boundary" tag.
+        // Perform a raycast on all layers.
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1f);
+
+        // Check if the ray hit any object with the "Boundary" tag.
         if (hit.collider != null && hit.collider.CompareTag("Boundary"))
         {
             return true; // Player is inside the boundary.
