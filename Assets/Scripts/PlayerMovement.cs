@@ -23,12 +23,12 @@ public class PlayerMovement : MonoBehaviour
             FindAnyObjectByType<CountdownTimer>().isActive = true;
         }
 
-        // Check if the player's position is outside the boundary
+        /*// Check if the player's position is outside the boundary
         if (!isInBoundary())
         {
             // Player is out of bounds, restart the level
             SceneManager.LoadScene("Level_" + level.ToString());
-        }
+        }*/
     }
 
         /*static void Main(string[] args)
@@ -70,7 +70,7 @@ void BombExplosion()
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
-    private bool isInBoundary()
+    /*private bool isInBoundary()
     {
         // Get the boundary collider's position and size
         Collider2D boundaryCollider = GameObject.Find("Boundary").GetComponent<Collider2D>();
@@ -88,5 +88,5 @@ void BombExplosion()
         }
 
         return false;
-    }
+    }*/
 }

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class CountdownTimer : MonoBehaviour
 {
     [SerializeField] private float startTime = 10f;
-    private float currentTime;
+    [HideInInspector] public float currentTime;
     [SerializeField] private TextMeshPro timerText;
     [SerializeField] private Vector2 direction = Vector2.up;
     [SerializeField] private Color startColor = Color.green;
@@ -33,7 +33,6 @@ public class CountdownTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isActive);
         if (isActive)
         {
             currentTime -= Time.deltaTime;

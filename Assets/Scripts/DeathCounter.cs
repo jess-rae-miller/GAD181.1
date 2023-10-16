@@ -7,8 +7,8 @@ public class DeathCounter : MonoBehaviour
     public TextMeshPro totalDeathText;  // Reference to a Text component for total deaths
     public TextMeshPro sceneDeathText;  // Reference to a Text component for deaths in this scene
 
-    private int totalDeaths;
-    private int sceneDeaths;
+    [HideInInspector] public int totalDeaths;
+    [HideInInspector] public int sceneDeaths;
     private SaveManager saveManager;
 
     private void Start()
