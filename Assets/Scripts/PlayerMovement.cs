@@ -27,12 +27,12 @@ public class PlayerMovement : MonoBehaviour
             FindAnyObjectByType<CountdownTimer>().isActive = true;
         }
 
-        /*// Check if the player's position is outside the boundary
+        // Check if the player's position is outside the boundary
         if (!isInBoundary())
         {
             // Player is out of bounds, restart the level
             SceneManager.LoadScene("Level_" + level.ToString());
-        }*/
+        }
     }
 
     private void PlaceBomb()
@@ -63,23 +63,20 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
-    /*private bool isInBoundary()
+    private bool isInBoundary()
     {
-        // Get the boundary collider's position and size
-        Collider2D boundaryCollider = GameObject.Find("Boundary").GetComponent<Collider2D>();
+        // Cast a ray from the player's current position to a direction (e.g., Vector2.down).
+        // Adjust the direction based on your game's design.
+        Vector2 rayDirection = Vector2.down; // You can change this direction as needed.
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1f, LayerMask.GetMask("Boundary"));
 
-        // Get the player's position
-        Vector2 playerPosition = transform.position;
-
-        // Check if the player's position is within the boundary
-        if (playerPosition.x >= boundaryCollider.bounds.min.x &&
-            playerPosition.x <= boundaryCollider.bounds.max.x &&
-            playerPosition.y >= boundaryCollider.bounds.min.y &&
-            playerPosition.y <= boundaryCollider.bounds.max.y)
+        // Check if the ray hit an object with the "boundary" tag.
+        if (hit.collider != null && hit.collider.CompareTag("Boundary"))
         {
-            return true;
+            return true; // Player is inside the boundary.
         }
 
-        return false;
-    }*/
+        return false; // Player is outside the boundary.
+    }
+
 }
