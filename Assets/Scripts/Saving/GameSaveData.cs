@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using UnityEngine;
-using UnityEditor.SceneManagement;
 
 [System.Serializable]
-public class GameSaveData {
-      // Saved Data
+public class GameSaveData
+{
     public int totalDeaths;
     public int sceneDeaths;
 
@@ -13,8 +10,12 @@ public class GameSaveData {
 
     public GameSaveData()
     {
-        sceneTimes = new Dictionary<string, float>();
+        if (sceneTimes == null)
+        {
+            sceneTimes = new Dictionary<string, float>();
+        }
     }
+
     public void ResetSceneDeaths()
     {
         totalDeaths = 0;

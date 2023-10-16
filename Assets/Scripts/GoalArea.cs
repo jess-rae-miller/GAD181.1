@@ -10,10 +10,10 @@ public class GoalArea : MonoBehaviour
     private GameSaveData gameSaveData;
     private int currentSceneNumber; // Store the scene number as an integer
     private SaveManager saveManager;
+
     void Start()
     {
         saveManager = FindAnyObjectByType<SaveManager>();
-
         timer = FindAnyObjectByType<CountdownTimer>();
 
         // Load the saved game data
@@ -21,6 +21,8 @@ public class GoalArea : MonoBehaviour
 
         // Use regular expression to extract the number from the scene name
         currentSceneNumber = ExtractSceneNumber(SceneManager.GetActiveScene().name);
+
+        Debug.Log("Current Scene Name: " + SceneManager.GetActiveScene().name);
     }
 
     private int ExtractSceneNumber(string sceneName)
@@ -47,18 +49,25 @@ public class GoalArea : MonoBehaviour
             // Get the current scene's name
             string currentSceneName = SceneManager.GetActiveScene().name;
 
+            Debug.Log("Entered Goal Area in Scene: " + currentSceneName);
+
             // Check if there's a saved best time for this scene
             if (gameSaveData.sceneTimes.ContainsKey(currentSceneName))
             {
                 float savedBestTime = gameSaveData.sceneTimes[currentSceneName];
 
                 // Compare the current time with the saved best time
-                if (timer.currentTime > savedBestTime)
+                if (timer.currentTime < savedBestTime)
                 {
                     // Update the saved best time
                     gameSaveData.sceneTimes[currentSceneName] = timer.currentTime;
                     // Save the updated data
                     SaveGame(gameSaveData);
+                    Debug.Log("New Best Time for Scene " + currentSceneName + ": " + timer.currentTime);
+                }
+                else
+                {
+                    Debug.Log("Current Time for Scene " + currentSceneName + " is not better than the previous best time.");
                 }
             }
             else
@@ -67,6 +76,7 @@ public class GoalArea : MonoBehaviour
                 gameSaveData.sceneTimes[currentSceneName] = timer.currentTime;
                 // Save the data
                 SaveGame(gameSaveData);
+                Debug.Log("First Best Time for Scene " + currentSceneName + ": " + timer.currentTime);
             }
 
             // Load the next scene

@@ -1373,69 +1373,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7012168372642820104, guid: 3d3e4570d6ac2414a81207b4bfec6a01, type: 3}
   m_PrefabInstance: {fileID: 283160384}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
---- !u!1001 &293663907
-=======
 --- !u!1001 &292453046
->>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-<<<<<<< Updated upstream
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1001614838606163304, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_Name
-      value: TimerPowerUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 58.771683
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 17.372986
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
-=======
     m_TransformParent: {fileID: 15756229}
     m_Modifications:
     - target: {fileID: 4129248226013045331, guid: 3d3e4570d6ac2414a81207b4bfec6a01, type: 3}
@@ -1501,7 +1444,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d3e4570d6ac2414a81207b4bfec6a01, type: 3}
->>>>>>> Stashed changes
 --- !u!1001 &373468355
 PrefabInstance:
   m_ObjectHideFlags: 0
