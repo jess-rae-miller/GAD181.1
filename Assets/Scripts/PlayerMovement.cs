@@ -10,13 +10,17 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 moveDirection;
     public int level;
-    private int bombcount;
+    public int bombCount = 0;
+    [SerializeField] private GameObject bombPrefab;
 
     // Update is called once per frame
     void Update()
     {
         ProcessInputs();
-
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            PlaceBomb();
+        }
         // Check if the player has moved
         if (moveDirection != Vector2.zero)
         {
@@ -31,26 +35,15 @@ public class PlayerMovement : MonoBehaviour
         }*/
     }
 
-        /*static void Main(string[] args)
+    private void PlaceBomb()
     {
-        while (true)
+        if(bombCount > 0)
         {
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.E)
-            {
-                // Call your function here
-                BombExplosion();
-            }
+            Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            bombCount--;
         }
     }
-void BombExplosion()
-    {
-        if (bombcount >= 1)
-        {
 
-        }
-    }*/
     void FixedUpdate()
     {
         Move();

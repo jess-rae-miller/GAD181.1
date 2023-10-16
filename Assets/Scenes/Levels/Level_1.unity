@@ -1415,6 +1415,18 @@ PrefabInstance:
       value: TimerPowerUp (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245584061916478061, guid: 5d956c4f79311d8408f8e7e6f5d76fdf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20.854671
       objectReference: {fileID: 0}
@@ -7380,6 +7392,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1056715193177913207, guid: 122eb0bddf2d1b84c860ac2a284d0135, type: 3}
+      propertyPath: bombCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3542049304653243149, guid: 122eb0bddf2d1b84c860ac2a284d0135, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter

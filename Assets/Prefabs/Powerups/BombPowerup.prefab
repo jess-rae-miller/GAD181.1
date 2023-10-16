@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4245584061916478061}
   - component: {fileID: 7842022831763606760}
   - component: {fileID: 1697602889773632603}
-  - component: {fileID: 3569358299947319331}
+  - component: {fileID: -6184966808315485623}
   m_Layer: 0
-  m_Name: TimerPowerUp
+  m_Name: BombPowerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 03af32c2e4a72d44884ee78ce8a6ec2a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d7e84d32655945439f0a98b8016b92b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3569358299947319331
+--- !u!114 &-6184966808315485623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,11 +130,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1001614838606163304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ffc4ec2b6aad134baff245b49eeb3ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 411884e8f2526e348b619cf5fc5b2935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 0}
   player: {fileID: 0}
   playerRenderer: {fileID: 0}
   playerCollider: {fileID: 0}
-  timerIncreaseAmount: 5

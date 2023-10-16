@@ -243,6 +243,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rb: {fileID: 597558437732231126}
+  level: 0
+  bombCount: 0
+  bombPrefab: {fileID: 4287194561680055005, guid: 1114cce99a57cb44baac196da2ac6ac7, type: 3}
 --- !u!50 &597558437732231126
 Rigidbody2D:
   serializedVersion: 4

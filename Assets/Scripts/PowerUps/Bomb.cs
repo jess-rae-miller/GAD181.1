@@ -13,6 +13,7 @@ public class Bomb : MonoBehaviour
     private Color originalColor;
     private bool isExploding = false;
     private float blinkInterval;
+    private float explosionScheduledTime; // Store the time when the explosion is scheduled
 
     void Start()
     {
@@ -23,11 +24,12 @@ public class Bomb : MonoBehaviour
         int numBlinks = Mathf.FloorToInt(totalExplosionTime / 0.1f); // 0.1f is the blink duration
         blinkInterval = totalExplosionTime / (2 * numBlinks);
 
-        InvokeRepeating("ToggleBlink", 0.0f, blinkInterval);
+        // Set the scheduled explosion time
+        explosionScheduledTime = Time.time + totalExplosionTime;
 
-        // Explicitly set the explosion time
-        float explosionScheduledTime = Time.time + totalExplosionTime;
-        StartCoroutine(CountdownToExplosion(explosionScheduledTime));
+        // Invoke the countdown and explosion
+        InvokeRepeating("ToggleBlink", 0.0f, blinkInterval);
+        Invoke("Explode", totalExplosionTime);
     }
 
     void Update()
@@ -35,10 +37,11 @@ public class Bomb : MonoBehaviour
         // Update the TextMeshPro text to display the rounded time until explosion
         if (!isExploding)
         {
-            float timeLeft = Mathf.Max(0, Mathf.Ceil(totalExplosionTime - Time.time));
+            float timeLeft = Mathf.Max(0, explosionScheduledTime - Time.time);
             timeText.text = timeLeft.ToString("F0"); // "F0" rounds to a whole number
         }
     }
+
 
     void ToggleBlink()
     {
