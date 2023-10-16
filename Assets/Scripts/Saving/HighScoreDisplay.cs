@@ -1,33 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HighScoreDisplay : MonoBehaviour
 {
-    private TextMeshPro highscoreText;
-    private GameSaveData gameSaveData;
+    public TextMeshPro highScoreText;  // Reference to a TextMeshPro component for displaying the highest score
+    private SaveManager saveManager; // Reference to your SaveManager script
 
-    void Start()
+    private void Awake()
     {
-        highscoreText = GetComponent<TextMeshPro>();
-        gameSaveData = new GameSaveData(); // Initialize the GameSaveData instance
-        UpdateHighscoreText();
+        // Find the GameObject with the SaveManager script and get a reference to it
+        saveManager = FindObjectOfType<SaveManager>();
     }
 
-    public void UpdateHighscoreText() {
-
-        // Retrieve the high score for the current level
-        var highscore = gameSaveData.GetHighscoreForLevel(gameSaveData.GetSceneNumber(SceneManager.GetActiveScene().name));
-
-        if (highscore.Item1 != -1 && highscore.Item2 != -1f)
+    private void Start()
+    {
+        if (saveManager != null)
         {
-            highscoreText.text = "High Score\nDeaths: " + highscore.Item1 + "\nTime: " + highscore.Item2.ToString("F2");
+            // Load the saved data
+            GameSaveData savedData = saveManager.LoadGame();
+
+            // Get the current scene name
+            string sceneName = SceneManager.GetActiveScene().name;
+            Debug.Log(savedData != null);
+            Debug.Log(sceneName);
+            Debug.Log(savedData.sceneTimes != null) ;
+            // Check if the scene has a high score
+            if (savedData.sceneTimes.ContainsKey(sceneName))
+            {
+                // Get the highest score for the current scene
+                float highestScore = savedData.sceneTimes[sceneName];
+                highScoreText.text = highestScore.ToString("F2"); // Format the time to display
+            }
+            else
+            {
+                // If there is no high score for the scene, display a default message
+                highScoreText.text = "N/A";
+            }
         }
         else
         {
-            highscoreText.text = "High Score\nN/A";
+            Debug.LogError("SaveManager not found in the scene.");
         }
     }
 }

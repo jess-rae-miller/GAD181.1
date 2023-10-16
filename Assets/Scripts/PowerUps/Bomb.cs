@@ -90,7 +90,6 @@ public class Bomb : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         foreach (Collider2D col in colliders)
         {
-            Debug.Log(col.name);
             if (col.CompareTag("Walls")) // Check if the object has the "Walls" tag
             {
                 col.gameObject.SetActive(false);

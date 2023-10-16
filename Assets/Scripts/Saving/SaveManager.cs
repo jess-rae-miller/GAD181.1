@@ -29,6 +29,7 @@ public class SaveManager : MonoBehaviour
             return new GameSaveData();
         }
     }
+
     public void ResetSceneDeaths()
     {
         GameSaveData savedData = LoadGame();

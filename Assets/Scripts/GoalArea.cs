@@ -9,11 +9,15 @@ public class GoalArea : MonoBehaviour
     private CountdownTimer timer;
     private GameSaveData gameSaveData;
     private int currentSceneNumber; // Store the scene number as an integer
-
+    private SaveManager saveManager;
     void Start()
     {
+        saveManager = FindAnyObjectByType<SaveManager>();
+
         timer = FindAnyObjectByType<CountdownTimer>();
-        gameSaveData = new GameSaveData(); // Initialize the GameSaveData instance
+
+        // Load the saved game data
+        gameSaveData = LoadSavedData();
 
         // Use regular expression to extract the number from the scene name
         currentSceneNumber = ExtractSceneNumber(SceneManager.GetActiveScene().name);
@@ -25,7 +29,7 @@ public class GoalArea : MonoBehaviour
         Match match = Regex.Match(sceneName, @"\d+");
         if (match.Success)
         {
-            return int.Parse(match.Value)-1;
+            return int.Parse(match.Value) - 1;
         }
         else
         {
@@ -40,25 +44,36 @@ public class GoalArea : MonoBehaviour
         {
             timer.isActive = false;
 
-            // Check if the current time and death count set a new high score
-            var currentPlayerStats = (gameSaveData.sceneDeaths, timer.currentTime);
-            var currentHighScore = gameSaveData.GetHighscoreForLevel(currentSceneNumber); // Use the extracted scene number
+            // Get the current scene's name
+            string currentSceneName = SceneManager.GetActiveScene().name;
 
-            if (currentHighScore.Item1 == -1 || // No previous high score
-                currentPlayerStats.Item2 < currentHighScore.Item2 || // New best time
-                (currentPlayerStats.Item2 == currentHighScore.Item2 && currentPlayerStats.Item1 < currentHighScore.Item1)) // Same time but fewer deaths
+            // Check if there's a saved best time for this scene
+            if (gameSaveData.sceneTimes.ContainsKey(currentSceneName))
             {
-                // Update the high score
-                gameSaveData.SetHighscoreForLevel(currentSceneNumber, currentPlayerStats); // Use the extracted scene number
+                float savedBestTime = gameSaveData.sceneTimes[currentSceneName];
+
+                // Compare the current time with the saved best time
+                if (timer.currentTime > savedBestTime)
+                {
+                    // Update the saved best time
+                    gameSaveData.sceneTimes[currentSceneName] = timer.currentTime;
+                    // Save the updated data
+                    SaveGame(gameSaveData);
+                }
+            }
+            else
+            {
+                // If no saved best time exists, save the current time
+                gameSaveData.sceneTimes[currentSceneName] = timer.currentTime;
+                // Save the data
+                SaveGame(gameSaveData);
             }
 
-            // Get the build index of the next scene
+            // Load the next scene
             int nextSceneBuildIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-            // Check if there's a scene at the next build index
             if (nextSceneBuildIndex < SceneManager.sceneCountInBuildSettings)
             {
-                // Load the next scene
                 gameSaveData.ResetSceneDeaths();
                 SceneManager.LoadScene(nextSceneBuildIndex);
             }
@@ -67,5 +82,19 @@ public class GoalArea : MonoBehaviour
                 Debug.LogWarning("No next scene available.");
             }
         }
+    }
+
+    // Function to load saved data (you can implement this according to your SaveManager)
+    private GameSaveData LoadSavedData()
+    {
+        // Implement loading your saved data (GameSaveData) here using your SaveManager
+        return saveManager.LoadGame(); // Replace with the correct method from your SaveManager
+    }
+
+    // Function to save the game data (you can implement this according to your SaveManager)
+    private void SaveGame(GameSaveData data)
+    {
+        // Implement saving your game data (GameSaveData) here using your SaveManager
+        saveManager.SaveGame(data); // Replace with the correct method from your SaveManager
     }
 }
